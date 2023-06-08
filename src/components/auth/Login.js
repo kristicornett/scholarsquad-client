@@ -20,6 +20,7 @@ export const Login = ({ setToken }) => {
         .then(response => {
             if ('valid' in response && response.valid) {
                 setToken(response.token)
+                localStorage.setItem('scholarSquad_user', JSON.stringify(response.user))
                 navigate('/')
             }
             else {

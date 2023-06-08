@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { NavBar } from './components/nav/NavBar';
 
 export const ScholarSquad = () => {
-  const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+  const [token, setTokenState] = useState(localStorage.getItem('scholarSquad_token'))
 
   const setToken = (newToken) => {
-    localStorage.setItem('auth_token', newToken)
+    localStorage.setItem('scholarSquad_token', newToken)
     setTokenState(newToken)
   }
   return <>

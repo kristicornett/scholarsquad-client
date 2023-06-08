@@ -10,6 +10,14 @@ export const getAllQuizzes = () => {
     .then((response) => response.json())
 }
 
+export const getSingleQuiz = (quiz_id) => {
+    return fetch(`${url}/quiz/${quiz_id}`, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('auth_token')}`,
+        },
+    }).then((response) => response.json())
+}
+
 export const createQuiz = (newQuiz) => {
     return fetch(`${url}/quiz`, {
         method: 'POST', 
@@ -21,6 +29,14 @@ export const createQuiz = (newQuiz) => {
     })
     .then((response) => response.json())
 }
+
+export const getMyQuiz = () => {
+    return fetch(`${url}/quiz?_user=user`, {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_token")}`,
+      },
+    }).then((response) => response.json());
+  }
 
 export const updateQuiz = (quiz) => {
     return fetch(`${url}/quiz/${quiz.id}`, {
