@@ -29,7 +29,7 @@ export const NavBar = ({ token, setToken }) => {
                 <Link to="/classes" className="navbar-item">
                   My Classes
                 </Link>
-                <Link to="/quiz" className="navbar-item">
+                <Link to="/my_quiz" className="navbar-item">
                   My Quizzes
                 </Link>
                 <Link to="/students" className="navbar-item">
@@ -53,13 +53,13 @@ export const NavBar = ({ token, setToken }) => {
                 <Link to="/teachers" className="navbar-item">
                   Teachers
                 </Link>
-                <Link to="/quiz" className="navbar-item">
+                <Link to="/my_quizzes" className="navbar-item">
                   My Quizzes
                 </Link>
                 <Link to="/messages" className="navbar-item">
                   My Messages
                 </Link>
-                <Link to="schools/:schoolId" className="navbar-item">
+                <Link to="/my_schools" className="navbar-item">
                   My School
                 </Link>
               
@@ -72,6 +72,35 @@ export const NavBar = ({ token, setToken }) => {
         )
       }
 
+    }
+
+    const renderRegisterLogin = () => {
+      return (<div className="navbar-end">
+      <div className="navbar-item">
+        <div className="buttons">
+          {token ? (
+            <button
+              className="button is-outlined"
+              onClick={() => {
+                setToken("");
+                navigate("/login");
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/register" className="button is-link">
+                Register
+              </Link>
+              <Link to="/login" className="button is-outlined">
+                Login
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </div>)
     }
 
     return (
@@ -107,36 +136,11 @@ export const NavBar = ({ token, setToken }) => {
           {token ? (
             renderUserNavSelections()
           ) : (
-            ""
+            renderRegisterLogin()
           )}
         </div>
 
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              {token ? (
-                <button
-                  className="button is-outlined"
-                  onClick={() => {
-                    setToken("");
-                    navigate("/login");
-                  }}
-                >
-                  Logout
-                </button>
-              ) : (
-                <>
-                  <Link to="/register" className="button is-link">
-                    Register
-                  </Link>
-                  <Link to="/login" className="button is-outlined">
-                    Login
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+        
       </div>
     </nav>
   );

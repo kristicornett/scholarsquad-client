@@ -3,18 +3,27 @@ const url = "http://localhost:8000"
 export const getAllClasses = () => {
     return fetch(`${url}/classes`,{
         headers: {
-            Authorization: `Token ${localStorage.getItem('auth_token')}`,
-
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`
         }
     })
     .then((response) => response.json())
 }
 
+export const getClassroomsBySchool = (schoolId) => {
+    return fetch(`${url}/classes?school_id=${schoolId}`,{
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`
+        }
+    })
+    .then((response) => response.json())
+}
+
+
 export const createClass = (newClass) => {
     return fetch(`${url}/classes`, {
         method: 'POST', 
         headers: {
-            Authorization: `Token ${localStorage.getItem('auth_token')}`,
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newClass),
@@ -26,7 +35,7 @@ export const updateClassroom = (classroom) => {
     return fetch(`${url}/classes/${classroom.id}`, {
         method: 'PUT',
         headers: {
-            Authorization: `Token ${localStorage.getItem('auth_token')}`,
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
             'Content-Type': 'application/son'
         },
         body: JSON.stringify(classroom)
@@ -38,7 +47,16 @@ export const deleteClass = (classId) => {
     return fetch(`${url}/classes/${classId}`, {
         method: 'DELETE',
         headers: {
-            Authorization: `Token ${localStorage.getItem('auth_token')}`
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`
         }
     })
+}
+
+export const getClassesByTeacher = (teacherId) => {
+    return fetch(`${url}/classes?teacher_id=${teacherId}`, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+        }
+    })
+    .then((response) => response.json())
 }

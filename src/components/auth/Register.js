@@ -36,6 +36,7 @@ export const Register = ({ setToken }) => {
 
       registerUser(newUser).then((response) => {
         if (response.token) {
+          setToken(response.token)
           navigate("/");
         }
       });
