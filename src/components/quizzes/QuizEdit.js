@@ -29,7 +29,7 @@ export const QuizEdit = () => {
 
     return (
         <>
-
+        <form>
         <h1>{quiz.title}</h1>
         <div>
             Teacher: {quiz.created_by}
@@ -46,6 +46,7 @@ export const QuizEdit = () => {
 
             })
         }
+        </form>
 
         </>
     )

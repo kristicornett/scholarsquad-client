@@ -24,6 +24,12 @@ export const QuizModal = ({ quiz, closeModal }) => {
             onChange={(event) => setEditQuiz(event.target.value)}>
 
             </textarea>
+            {quiz.answer}
+            <textarea
+            value={editQuiz}
+            onChange={(event) => setEditQuiz(event.target.value)}>
+
+            </textarea>
             <button onClick={handleSave}>Save</button>
             <button onClick={closeModal}>Cancel</button>
         </div>

@@ -9,11 +9,13 @@ export const StudentAddEdit = () => {
         {
             first_name: '',
             last_name: '',
+            school: '',
             grade: 0
         }
     )
     const studentFirstName = useRef()
     const studentLastName = useRef()
+    const studentSchool = useRef()
     const studentGrade = useRef()
 
     useEffect(
@@ -34,13 +36,15 @@ export const StudentAddEdit = () => {
         const studentObj = {
             'first_name': studentFirstName.current.value,
             'last_name': studentLastName.current.value,
+            'school_id': studentSchool.current.value,
             'grade': studentGrade.current.value
         }
 
         createStudent(studentObj)
-        .then(result => {
-            navigate('/students')
+        .then(() => {
+            navigate(`/students/`)
         })
+       
         .catch((reason) => {
             console.log(reason)
             alert('add student failed: ' + reason)
@@ -58,6 +62,9 @@ export const StudentAddEdit = () => {
           </div>
           <div>
             <input className="input" type="text" ref={studentLastName} />
+          </div>
+          <div>
+            <input className="input" type="number" ref={studentSchool} />
           </div>
           <div>
             <input className="input" type="number" ref={studentGrade} />
