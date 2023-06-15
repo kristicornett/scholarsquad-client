@@ -1,27 +1,34 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { getSingleSchool } from '../../managers/SchoolManager'
 import { TeacherHome } from '../teachers/TeacherHome'
 import { StudentHome } from '../students/StudentHome'
+import { AdminHome } from '../admin/AdminHome'
 
-export const Dashboard = () => {
+export const Dashboard = ({userData}) => {
     const {schoolId} = useParams()
+    const userToken = localStorage.getItem('scholarSquad_user')
 
     useEffect(
         () => {
         },
         []
     )
+
+    const renderHome = () => {
+        if(userData.isAdmin){
+            return <AdminHome></AdminHome>
+        }
+        else if(userData.isStaff){
+            return <TeacherHome userData={userData}></TeacherHome>
+        }
+        else{
+            return <StudentHome userData={userData}></StudentHome>
+        }
+    }
+
     return  <>
-        <div>Home Page</div>
-        <div>If I'm an Admin</div>
-        <div><Link to="/Schools" className="">Schools</Link></div>
-        <div></div>
-        <div>If I'm a Teacher</div>
-        <TeacherHome></TeacherHome>
-        <div>Load Teacher Home</div>
-        <div>If I'm a Student</div>
-        <StudentHome></StudentHome>
-        <div>Load Student Home</div>
-</>
+                {
+                    renderHome()
+                }
+            </>
 }

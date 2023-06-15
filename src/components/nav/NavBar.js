@@ -23,22 +23,22 @@ export const NavBar = ({ token, setToken }) => {
         if (user.isStaff){
             return (
             <>
-                <Link to="/profile" className="navbar-item">
+                <Link to="/profile" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Profile
                 </Link>
-                <Link to="/classes" className="navbar-item">
+                <Link to="/classes" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Classes
                 </Link>
-                <Link to="/my_quiz" className="navbar-item">
+                <Link to="/my_quiz" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Quizzes
                 </Link>
-                <Link to="/students" className="navbar-item">
+                <Link to="/students" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Students
                 </Link>
-                <Link to="/messages" className="navbar-item">
+                <Link to="/messages" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Messages
                 </Link>
-                <Link to="schools/:schoolId" className="navbar-item">
+                <Link to="schools/:schoolId" className="navbar-item text-blue-600 visited:text-purple-600">
                   My School
                 </Link>
               
@@ -47,19 +47,19 @@ export const NavBar = ({ token, setToken }) => {
         else{  //is not staff, is student
           return (
             <>
-                <Link to="/profile" className="navbar-item">
+                <Link to="/profile" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Profile
                 </Link>
-                <Link to="/teachers" className="navbar-item">
+                <Link to="/teachers" className="navbar-item text-blue-600 visited:text-purple-600">
                   Teachers
                 </Link>
-                <Link to="/my_quizzes" className="navbar-item">
+                <Link to="/my_quizzes" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Quizzes
                 </Link>
-                <Link to="/messages" className="navbar-item">
+                <Link to="/messages" className="navbar-item text-blue-600 visited:text-purple-600">
                   My Messages
                 </Link>
-                <Link to="/my_schools" className="navbar-item">
+                <Link to="/my_schools" className="navbar-item text-blue-600 visited:text-purple-600">
                   My School
                 </Link>
               
@@ -112,7 +112,7 @@ export const NavBar = ({ token, setToken }) => {
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
          
-          <h1 className="title is-4">Scholar Squad</h1>
+          <h1 className="title is-4 text-blue-600 visited:text-purple-600">Scholar Squad</h1>
         </a>
 
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

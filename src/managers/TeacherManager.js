@@ -62,3 +62,14 @@ export const getSingleTeacher = (teacherId) => {
     })
         .then(response => response.json())
 }
+
+export const getTeacherClassrooms = (teacherId) => {
+    return fetch(`${url}/teachers/${teacherId}/classrooms`,{
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+            'Content-Type': 'application/son'
+        }
+    })
+        .then(response => response.json())
+
+}

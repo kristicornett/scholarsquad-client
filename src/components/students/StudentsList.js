@@ -32,7 +32,7 @@ export const StudentList = () => {
   return (
     <>
       <div>
-        <span>Students</span>
+        <span className="text-4xl text-red-400">Students</span>
       </div>
       <button type="submit" onClick={() => navigate("/students/add")}>
         {" "}
