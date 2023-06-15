@@ -60,3 +60,12 @@ export const getClassesByTeacher = (teacherId) => {
     })
     .then((response) => response.json())
 }
+
+export const getSingleClass = (classId) => {
+    return fetch(`${url}/classes/${classId}`, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`
+        }
+    })
+    .then(response => response.json())
+}

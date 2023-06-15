@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getSingleTeacher } from '../../managers/TeacherManager'
 import { getClassesByTeacher } from '../../managers/ClassManager'
 import { getQuizzesByTeacher } from '../../managers/QuizManager'
@@ -44,7 +44,9 @@ export const TeacherDetails = () => {
         <div>List of Classes</div>
         {classrooms.map((classroom) => {
             return <div key={classroom.id}>
-                <span>{classroom.name}</span>
+                  <Link to={`/teachers/classroom/${classroom.id}`}>
+                    <span>{classroom.name}</span>
+                  </Link>
                 <button type="button">Manage</button>
                 <button type="button">Delete</button>
                 </div>
@@ -53,7 +55,7 @@ export const TeacherDetails = () => {
         <div>List of Quizzes</div>
         {quizzes.map((quiz) => {
             return <div key={quiz.id}>
-                <span>{quiz.title}</span>
+             <span>{quiz.title}</span>
                 <button type="button">Manage</button>
                 <button type="button">Delete</button>
             </div>

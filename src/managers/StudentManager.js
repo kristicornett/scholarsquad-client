@@ -60,3 +60,14 @@ export const deleteStudent = (studentId) => {
         }
     })
 }
+
+export const getStudentClassrooms = (studentId) => {
+    return fetch(`${url}/students/${studentId}/classrooms`,{
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+            'Content-Type': 'application/son'
+        }
+    })
+        .then(response => response.json())
+
+}

@@ -10,10 +10,10 @@ import { SchoolAddEdit } from "../schools/SchoolAddEdit.js";
 import { TeacherList } from "../teachers/TeacherList";
 import { TeacherDetails } from "../teachers/TeacherDetails";
 import { TeacherAddEdit } from "../teachers/TeacherAddEdit";
-import { StudentAddEdit } from "../students/StudentAddEdit";
+import { StudentAdd } from "../students/StudentAdd";
 import { StudentList } from "../students/StudentsList";
 import { QuizEdit } from "../quizzes/QuizEdit";
-import { ClassroomAdd } from "../classes/ClassroomAdd";
+import { ClassroomAdd } from "../classrooms/ClassroomAdd";
 import { TeacherClassDetail } from "../teachers/TeachClassDetail";
 
 export const ApplicationViews = ({ token, setToken }) => {
@@ -33,10 +33,10 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/teachers" element={<TeacherList />} />
           <Route path="/teachers/:teacherId" element={<TeacherDetails />} />
           <Route path="/teachers/add" element={<TeacherAddEdit />} />
-          <Route path="/students/add" element={<StudentAddEdit />} />
+          <Route path="/students/add" element={<StudentAdd />} />
           <Route path="/students" element={<StudentList />} />
           <Route path="/classrooms/add" element= { <ClassroomAdd />} />
-          <Route path="/teachers/classroom/:classroomId" element={ <TeacherClassDetail />} />
+          <Route path="/teachers/classroom/:classId" element={ <TeacherClassDetail />} />
         </Route>
       </Routes>
     </>
