@@ -18,6 +18,15 @@ export const getClassroomsBySchool = (schoolId) => {
     .then((response) => response.json())
 }
 
+export const getClassStudents = (classId) => {
+    return fetch(`${url}/classes/${classId}/get_students`,{
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+        }
+    })
+    .then((response) => response.json())
+}
+
 
 export const createClass = (newClass) => {
     return fetch(`${url}/classes`, {
@@ -36,7 +45,7 @@ export const updateClassroom = (classroom) => {
         method: 'PUT',
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(classroom)
     })
@@ -51,6 +60,23 @@ export const deleteClass = (classId) => {
         }
     })
 }
+
+
+export const addStudentToClass = (classId, studentId) => {
+    const objBody = {
+        "studentId": studentId
+    }
+    return fetch(`${url}/classes/${classId}/students`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(objBody)
+    })
+    
+}
+
 
 export const getClassesByTeacher = (teacherId) => {
     return fetch(`${url}/classes?teacher_id=${teacherId}`, {
@@ -69,3 +95,4 @@ export const getSingleClass = (classId) => {
     })
     .then(response => response.json())
 }
+

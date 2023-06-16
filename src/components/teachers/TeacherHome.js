@@ -33,7 +33,7 @@ export const TeacherHome = ({userData}) => {
     return (
         <>
         <h2>Teacher Dashboard</h2>
-        <div>My School: {teacher.school.name}</div>
+        <div>My School: {teacher?.school?.name}</div>
         <div>Classes</div>
         <div><Link to={`/classrooms/add`}>Add a Class</Link></div>
         <div>
