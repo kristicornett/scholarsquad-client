@@ -9,6 +9,8 @@ import { createClass } from "../../managers/ClassManager"
 export const ClassroomAdd = () => {
     const user = JSON.parse(localStorage.getItem("scholarSquad_user"))
     const className = useRef()
+    const description = useRef()
+    const roomNumber = useRef()
     const navigate = useNavigate();
     const [teacher, setTeacher] = useState({"school": {}})
     
@@ -25,6 +27,8 @@ export const ClassroomAdd = () => {
         const classObj = {
             "name": className.current.value,
             "school": teacher.school.id,
+            "description": description.current.value,
+            "roomNumber": roomNumber.current.value,
             "teacher": teacher.id
         }
 
@@ -47,6 +51,14 @@ export const ClassroomAdd = () => {
             <div>
                 <label>School:</label>
                 <span>{teacher.school.name}</span>
+            </div>
+            <div>
+                <label>Description:</label>
+                <input type="text" ref={description}></input>
+            </div>
+            <div>
+                <label>Room Number:</label>
+                <input type="text" ref={roomNumber}></input>
             </div>
             <div>
                 <button type="button" onClick={onSaveClassroomClick}>Save</button>

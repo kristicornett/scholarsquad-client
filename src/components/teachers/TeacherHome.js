@@ -23,8 +23,8 @@ export const TeacherHome = ({userData}) => {
     const renderClassrooms = () => {
         return classrooms.map((classroom) =>
         {
-            return <div>
-                    <Link key={classroom.id} to={`/classrooms/${classroom.id}`}>{classroom.name}</Link>
+            return <div key={classroom.id}>
+                    <Link to={`/classrooms/${classroom.id}`}>{classroom.name}</Link>
                 </div>
         })
     }

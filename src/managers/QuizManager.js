@@ -91,3 +91,18 @@ export const getAssignedStudents = (quizId) => {
     })
     .then((response) => response.json())
 }
+
+export const assignStudent = (quizId, studentId) => {
+    const body = {
+        studentId: studentId
+    }
+    return fetch(`${url}/quizzes/${quizId}/assign`, {
+        method: 'POST', 
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body),
+    })
+    .then((response) => response.json())
+}

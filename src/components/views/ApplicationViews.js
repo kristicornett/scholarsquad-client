@@ -16,6 +16,7 @@ import { QuizDetailView } from "../quizzes/QuizDetailView";
 import { ClassroomAdd } from "../classrooms/ClassroomAdd";
 import { ClassroomsView } from "../classrooms/ClassroomsView";
 import { ClassroomDetailView } from "../classrooms/ClassroomDetailView";
+import { QuizzesView } from "../quizzes/QuizzesView";
 
 export const ApplicationViews = ({ token, setToken }) => {
   const userToken = localStorage.getItem('scholarSquad_user');
@@ -40,6 +41,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/students" element={<StudentList />} />
           <Route path="/classrooms/add" element= { <ClassroomAdd />} />
           <Route path="/classrooms" element={<ClassroomsView userData={userData} />} />
+          <Route path="quizzes" element={<QuizzesView userData={userData} />} />
           <Route path="classrooms/:classroomId" element={ <ClassroomDetailView userData={userData} />} />
           <Route path="classrooms/:classroomId/create-quiz" element={ <QuizCreate />} />
         </Route>

@@ -164,7 +164,7 @@ export const QuizCreate = () => {
   }
 
   const renderQuestion = (question) => {
-    return <div>
+    return <div key={question.id}>
         <Typography variant="h5">{question.question}</Typography><IconButton aria-label="delete" onClick={onDeleteQuestion(question.question)}>
                                                                     <DeleteIcon />
                                                                   </IconButton> 
@@ -205,7 +205,7 @@ export const QuizCreate = () => {
     </Stack>
     </div>
     <div style={{float: "right"}}>
-             Right Div If Neeeded
+             Right Div If Needed
         </div>
     </div>
     <Box
@@ -286,85 +286,4 @@ export const QuizCreate = () => {
       </div>
 
 </Container>
-  //   <div>
-  //       <form>
-  //           <div>
-  //               <label>Create Quiz:</label>
-  //           </div>
-  //           <div>
-  //               <label>Quiz Title</label>
-  //               <input type='text' ref={title} placeholder="Quiz Title"/>
-  //           </div>
-  //           <label>Quiz Description:</label>
-  //           <textarea
-  //           ref={description}
-  //           placeholder="Quiz Description"
-  //           />
-            
-  //           <input type='text' value={keywordInput} onInput={e => setKeyWordInput(e.target.value)}/>
-  //           <button type="button" onClick={handleKeywordClick}>Add keyword</button>
-  //       </form>
-  //       <article className="keywords">
-  //       <ul>
-  //     {
-        
-  //       keywords.map(keyword => (
-  //         <li key={keyword}>{keyword}</li>
-  //       ))
-       
-  //     }
-  //      </ul>
-  //   </article>
-  //   <button type="button" onClick={generateQuizClick} disabled={isLoading}>Generate Quiz</button>
-
-  //   {questions && (
-  //       questions.map((question => {
-
-  //           return renderQuestion(question)
-  //       }))
-             
-  //   )}
-
-    
-  //       <div>
-  //           <button type="button" onClick={saveQuiz}>Save Quiz</button> 
-  //           <button type="button">Manage</button>
-  //       </div>
-
-  //   </div>
-   )
-  }
- 
-
-
-  //   const handleAIResponse = async (event) => {
-//     event.preventDefault()
-    
-//     try {
-        // const userObject = {
-        //     name: user.first_name + ' ' + user.last_name,
-        //     school: user.school,
-        //     schoolClass: user.schoolClass
-        // }
-        // const studentQuiz = quiz.map((quiz) => quiz.description)
-
-        // const userInput = `The quiz I want you to make is multiple choice, fill in the blank.
-        // I want 9th grade level vocabulary words used in a sentence for students to choose. You should make 10 questions for ${quiz.quiz}`
-
-        // const response = await(userInput)
-        // setQuiz(studentQuiz)
-
-//         const date = new Date().toISOString().split('T')[0]
-//         const newQuizObject = {
-//             title: quiz.title,
-//             
-//             description: quiz.description,
-//             question: response,
-//             start_date: date
-//         }
-//         setQuizObject(newQuizObject)
-//     } catch (error) {
-//         console.log('Error:', error)
-//     }
-
-//   }
+  )}

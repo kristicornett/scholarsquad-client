@@ -3,8 +3,8 @@ import { addStudentToClass, getSingleClass, getClassStudents } from "../../manag
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllStudents } from "../../managers/StudentManager";
 import { useRef } from "react";
-import { Button, Container, Stack, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { Button, Container, Stack, Typography, TextField, Box, TextareaAutosize, InputLabel, Select, MenuItem, FormLabel, FormControl, Card, CardContent, Chip, FormControlLabel, IconButton } from '@mui/material';
 
 
 export const TeacherClassDetail = ({userData, classroomId}) => {
@@ -173,9 +173,22 @@ export const TeacherClassDetail = ({userData, classroomId}) => {
                         </div>
 
                         <div style={{ float: "right" }}>
-                            <Button onClick={onClickCreateQuiz}>Add a Student</Button>
+                            <Button onClick={onClickAddStudent}>Add a Student</Button>
                         </div>
-                    </div>
+                        <FormControl fullWidth sx={{float:"right"}}>
+                            <Select 
+                            size="small"
+                            id="student-select"
+                            inputRef={selectedStudent}
+                            //onChange={(e) => { setSelectedClassroomId(e.target.value)}}
+                            displayEmpty
+                            >
+                            {filteredStudents.map((student) => {
+                                return <MenuItem key={student.id} value={student.id}>{student.full_name}</MenuItem>
+                            })}
+                            </Select>
+                        </FormControl>
+                                    </div>
                 }
 
             </div>

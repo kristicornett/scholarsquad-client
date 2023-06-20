@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getAssignedStudents, getSingleQuiz } from '../../managers/QuizManager'
+import { assignStudent, getAssignedStudents, getSingleQuiz } from '../../managers/QuizManager'
 import { Box, Button, Stack, Tab, Tabs, Typography } from '@mui/material'
 import PropTypes from 'prop-types';
 import { QuestionCard } from './QuestionCard';
@@ -33,16 +33,20 @@ export const QuizDetailView = () => {
             renderCell:  (params) => {
                 const currentRow = params.row
 
-                // const onClick = (e) => {
-                //   const currentRow = params.row;
-                //   navigate(`/classrooms/${currentRow.id}`)
-                // };
+                const onAssignClick = (e) => {
+                  const currentRow = params.row;
+                  const studentId = currentRow.id
+                  assignStudent(quizId, studentId)
+                  .then((data) => {
+                    refreshAssignedStudents()
+                  })
+                };
                 
                 return (
                   <Stack direction="row" spacing={2}>
                     
                     {!currentRow.isAssigned && 
-                        <Button variant='contained' size="small">Assign</Button>
+                        <Button variant='contained' size="small" onClick={onAssignClick}>Assign</Button>
                     }
                   </Stack>
                 );
@@ -50,6 +54,7 @@ export const QuizDetailView = () => {
           }
     ]
 
+    
     useEffect(() => {
         getSingleQuiz(quizId)
             .then((result) => {
@@ -89,6 +94,14 @@ export const QuizDetailView = () => {
         })
 
         setStudentRows(rows)
+    }
+
+    const refreshAssignedStudents = () => {
+        getAssignedStudents(quizId)
+        .then((data) => {
+            setAssignedStudents(data)
+            buildStudentRows(allStudents, data)
+        })
     }
 
     const onAddQuestionClick = (e) => {
