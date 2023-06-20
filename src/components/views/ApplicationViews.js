@@ -17,6 +17,8 @@ import { ClassroomAdd } from "../classrooms/ClassroomAdd";
 import { ClassroomsView } from "../classrooms/ClassroomsView";
 import { ClassroomDetailView } from "../classrooms/ClassroomDetailView";
 import { QuizzesView } from "../quizzes/QuizzesView";
+import { MessagesView } from '../messages/MessagesView'
+import { SchoolView } from "../schools/SchoolView";
 
 export const ApplicationViews = ({ token, setToken }) => {
   const userToken = localStorage.getItem('scholarSquad_user');
@@ -28,7 +30,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} setToken={setToken} />}>
         <Route path="/" element={<Dashboard token={token} userData={userData}/>} /> 
-          <Route path="/schools" element={<SchoolList />} />
+          <Route path="/schools" element={<SchoolView />} />
           <Route path="/schools/:schoolId" element={<SchoolDetails />} />
           <Route path="/schools/create" element={<SchoolAddEdit/>} />
           <Route path="/quizzes/:quizId" element={<QuizDetailView />} />
@@ -41,7 +43,8 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/students" element={<StudentList />} />
           <Route path="/classrooms/add" element= { <ClassroomAdd />} />
           <Route path="/classrooms" element={<ClassroomsView userData={userData} />} />
-          <Route path="quizzes" element={<QuizzesView userData={userData} />} />
+          <Route path="/quizzes" element={<QuizzesView userData={userData} />} />
+          <Route path='/messages' element={<MessagesView userData={userData} /> } />
           <Route path="classrooms/:classroomId" element={ <ClassroomDetailView userData={userData} />} />
           <Route path="classrooms/:classroomId/create-quiz" element={ <QuizCreate />} />
         </Route>
