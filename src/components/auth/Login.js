@@ -19,8 +19,7 @@ export const Login = ({ setToken }) => {
         loginUser(user)
         .then(response => {
             if ('valid' in response && response.valid) {
-                setToken(response.token)
-                localStorage.setItem('scholarSquad_user', JSON.stringify(response.user))
+                setToken(response.token, JSON.stringify(response.user))
                 navigate('/')
             }
             else {

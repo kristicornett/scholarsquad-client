@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TeacherHome } from '../teachers/TeacherHome'
 import { StudentHome } from '../students/StudentHome'
 import { AdminHome } from '../admin/AdminHome'
 
-export const Dashboard = ({userData}) => {
-    const {schoolId} = useParams()
-    const userToken = localStorage.getItem('scholarSquad_user')
+export const Dashboard = ({token, setToken, userData}) => {
+    const navigate = useNavigate()
+
 
     useEffect(
         () => {
+            if(!token || token.length === 0){
+                navigate('/login')
+           }
         },
         []
     )

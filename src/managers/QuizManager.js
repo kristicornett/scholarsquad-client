@@ -1,7 +1,7 @@
 const url = "http://localhost:8000"
 
 export const getAllQuizzes = () => {
-    return fetch(`${url}/quiz`,{
+    return fetch(`${url}/quizzes`,{
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
 
@@ -11,7 +11,7 @@ export const getAllQuizzes = () => {
 }
 
 export const getSingleQuiz = (quiz_id) => {
-    return fetch(`${url}/quiz/${quiz_id}`, {
+    return fetch(`${url}/quizzes/${quiz_id}`, {
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
         },
@@ -19,7 +19,7 @@ export const getSingleQuiz = (quiz_id) => {
 }
 
 export const createQuiz = (newQuiz) => {
-    return fetch(`${url}/quiz`, {
+    return fetch(`${url}/quizzes`, {
         method: 'POST', 
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
@@ -45,7 +45,7 @@ export const generateQuiz = (newQuiz) => {
 }
 
 export const getMyQuiz = () => {
-    return fetch(`${url}/quiz?_user=user`, {
+    return fetch(`${url}/quizzes?_user=user`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("scholarSquad_token")}`,
       },
@@ -53,11 +53,11 @@ export const getMyQuiz = () => {
   }
 
 export const updateQuiz = (quiz) => {
-    return fetch(`${url}/quiz/${quiz.id}`, {
+    return fetch(`${url}/quizzes/${quiz.id}`, {
         method: 'PUT',
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(quiz)
     })
@@ -74,7 +74,17 @@ export const deleteQuiz = (quizId) => {
 }
 
 export const getQuizzesByTeacher = (teacherId) => {
-    return fetch(`${url}/quiz?teacher_id=${teacherId}`, {
+    return fetch(`${url}/quizzes?teacher_id=${teacherId}`, {
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+        }
+    })
+    .then((response) => response.json())
+}
+
+export const getAssignedStudents = (quizId) => {
+
+    return fetch(`${url}/quizzes/${quizId}/assignees`, {
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
         }

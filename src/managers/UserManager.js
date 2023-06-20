@@ -1,12 +1,12 @@
-import { getToken } from "./TokenManager";
-
 const url = "http://localhost:8000"
 
 export const getUser = () => {
-    return fetch(`${url}/profile/my-profile`, {
+    const user = JSON.parse(localStorage.getItem('scholarSquad_user'))
+    const token = localStorage.getItem('scholarSquad_token')
+    return fetch(`${url}/users/${user.id}`, {
         method: 'GET',
         headers: {
-            Authorization: `Token ${getToken()}`
+            Authorization: `Token ${token}`
         },
     })
     .then((response) => response.json())

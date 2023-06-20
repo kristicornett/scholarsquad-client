@@ -37,7 +37,7 @@ export const updateTeacher = (teacher) => {
         method: 'PUT',
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(teacher)
     })
@@ -57,7 +57,7 @@ export const getSingleTeacher = (teacherId) => {
     return fetch(`${url}/teachers/${teacherId}`,{
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         }
     })
         .then(response => response.json())
@@ -67,7 +67,7 @@ export const getTeacherClassrooms = (teacherId) => {
     return fetch(`${url}/teachers/${teacherId}/classrooms`,{
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         }
     })
         .then(response => response.json())

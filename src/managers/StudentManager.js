@@ -22,7 +22,7 @@ export const getSingleStudent = (studentId) => {
     return fetch(`${url}/students/${studentId}`,{
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         }
     })
         .then(response => response.json())
@@ -45,7 +45,7 @@ export const updateStudent = (student) => {
         method: 'PUT',
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(student)
     })
@@ -65,9 +65,19 @@ export const getStudentClassrooms = (studentId) => {
     return fetch(`${url}/students/${studentId}/classrooms`,{
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         }
     })
         .then(response => response.json())
 
+}
+
+export const getStudentQuizzes = (studentId) => {
+    return fetch(`${url}/students/${studentId}/quizzes`,{
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
 }

@@ -15,15 +15,17 @@ export const StudentHome = ({userData}) => {
             })
 
             getStudentClassrooms(userData.studentId)
-            .then((results) => setClassrooms(results))
+            .then((results) => {;
+                setClassrooms(results)
+            })
         }, []
     )
 
     const renderClassrooms = () => {
         return classrooms.map((classroom) => 
         {
-            return<Link to={`/students/classroom/${classroom.id}`}>
-                <div key={classroom.id}>{classroom.name}</div>
+            return<Link key={classroom.id} to={`/classrooms/${classroom.id}`}>
+                <div>{classroom.name}</div>
             </Link>
         })
     }
@@ -33,10 +35,10 @@ export const StudentHome = ({userData}) => {
         <>
         <h2>Student Home</h2>
         <div>My Classes</div>
-        <div>My Latest Quizzes</div>
         <div>
             {renderClassrooms()}
         </div>
+        <div>My Latest Quizzes</div>
         <div><Link to='/'></Link></div>
         
         </>

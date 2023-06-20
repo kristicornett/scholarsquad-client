@@ -4,18 +4,19 @@ import { BrowserRouter } from "react-router-dom"
 import './index.css';
 import {ScholarSquad} from './ScholarSquad';
 import reportWebVitals from './reportWebVitals';
-import { Login } from './components/auth/Login';
-import { Register } from './components/auth/Register';
-import { SchoolList } from './components/schools/SchoolList';
-import { SchoolDetails } from './components/schools/SchoolDetails';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme'
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <ScholarSquad />
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <ScholarSquad />
+    </BrowserRouter>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -40,7 +40,7 @@ export const updateSchool = (school) => {
         method: 'PUT',
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(school)
     })
@@ -51,7 +51,7 @@ export const getSingleSchool = (schoolId) => {
     return fetch(`${url}/schools/${schoolId}`,{
         headers: {
             Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
-            'Content-Type': 'application/son'
+            'Content-Type': 'application/json'
         }
     })
         .then(response => response.json())
