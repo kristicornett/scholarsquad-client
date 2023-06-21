@@ -142,7 +142,7 @@ export const NavBar = ({ token, setToken, userToken }) => {
           textDecoration: 'none',
         }}
       >
-        LOGO
+        Scholar Squad
         
       </Typography>
 
@@ -157,7 +157,7 @@ export const NavBar = ({ token, setToken, userToken }) => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            
           </IconButton>
         </Toolbar>
       </AppBar>

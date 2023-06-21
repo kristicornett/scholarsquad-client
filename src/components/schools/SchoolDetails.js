@@ -47,22 +47,12 @@ export const SchoolDetails = () => {
 
     return  <>
      <div className="flex">
+     <div className='card-header'><h1>{schoolDetail.name}</h1></div>
     <div className="card">
         <div className="card-body">
-        <div>Name: {schoolDetail.name}</div>
-        <div>
-            Add Teacher: 
-            <select>
-                <option key={0} value={null}>Please select...</option>
-                {filteredTeachers.map((ft) => {
-                    return <option key={ft.id} value={ft.id}>{ft.full_name}</option>
-                })}
-            </select>
-            <button type="button">Add</button>
-        </div>
-        <div>List of Teachers</div>
+        <div className='card-title'><h3>Teachers</h3></div>
         {teachers.map((teacher) => {
-            return <div>
+            return <div className='card-name'>
                 <span>{teacher.full_name}</span>
                 <button type="button">Manage</button>
                 <button type="button">Delete</button>

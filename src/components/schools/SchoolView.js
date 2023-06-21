@@ -60,7 +60,7 @@ export const SchoolView = ({userData}) => {
     }, [])
 
     return (
-        <Box sx={{ height: 400, width: '100%' }}>
+        <Box sx={{ height: 550, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

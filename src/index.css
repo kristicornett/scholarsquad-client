@@ -49,18 +49,20 @@ code {
   flex-direction: column;
   flex-flow: column;
   
+  
 }
 
 .left-menu-item
 {
   flex-basis: auto;
   width: 100px;
-  height: 100px;
+  height: 75px;
   border: 1px solid white;
   border-radius: 10px;
   text-align: center;
   vertical-align: middleds;
   color: white;
+  padding-top: 40px;
 }
 
 .question-card{
@@ -78,5 +80,37 @@ code {
 .question-answer-cell{
   padding: 5px;
   margin: 2px;
+  
+}
+
+.card{
+  border-color: black;
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.card-body{
+  
+}
+
+.card-header{
+    color: rgb(45, 51, 130);
+    cursor: pointer;
+    vertical-align: middle;
+    text-shadow: 1px 1px rgb(125, 3, 165);
+    margin-right: 30px;
+    text-align: center;
+    order: 3;
+    
+  
+}
+
+.card-name{
+  border: 1px green solid;
+  padding: 20px;
+  width: 100%;
+  margin: 1em;
+  flex-basis: 20;
   
 }
