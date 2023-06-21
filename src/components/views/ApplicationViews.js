@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "../auth/Login";
 import { Register } from "../auth/Register";
 import { Authorized } from "../Authorized";
-import { SchoolList } from "../schools/SchoolList";
 import { SchoolDetails } from "../schools/SchoolDetails";
 import { QuizCreate } from "../quizzes/QuizCreate";
 import { Dashboard } from "./Dashboard";
@@ -19,6 +18,7 @@ import { ClassroomDetailView } from "../classrooms/ClassroomDetailView";
 import { QuizzesView } from "../quizzes/QuizzesView";
 import { MessagesView } from '../messages/MessagesView'
 import { SchoolView } from "../schools/SchoolView";
+import { QuizTake } from "../quizzes/QuizTake";
 
 export const ApplicationViews = ({ token, setToken }) => {
   const userToken = localStorage.getItem('scholarSquad_user');
@@ -47,6 +47,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path='/messages' element={<MessagesView userData={userData} /> } />
           <Route path="classrooms/:classroomId" element={ <ClassroomDetailView userData={userData} />} />
           <Route path="classrooms/:classroomId/create-quiz" element={ <QuizCreate />} />
+          <Route path="/quiz/:quizId" element={<QuizTake userData={userData}/> } />
         </Route>
       </Routes>
     </>

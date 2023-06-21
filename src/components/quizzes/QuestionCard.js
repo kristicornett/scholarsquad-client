@@ -14,6 +14,10 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
     const [correctAnswer, setCorrectAnswer] =useState(0)
     const questionFormRef = useRef()
 
+    //the purpose of this code is to create questions both using ai and teacher written
+    
+
+    //mode prop of whether or not to render an empty question or generated question
     useEffect(() => {
         if(mode == "add"){
             loadEmptyQuestion()
@@ -24,6 +28,7 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
 
     }, [])
 
+    //helper function to create a new empty question object and calls loadquestion
     const loadEmptyQuestion = () => {
         const newQuestion = {question: "", answers:[{id: -1, answer: "", isCorrect: true},
             {id: -1, answer: "", isCorrect: false},
@@ -33,11 +38,14 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
             setIsEditOn(true)
     }
 
+    //function to call when the user changes the selected answer for a question
+    //and update based on selection
     const onSelectedAnswerChanged  = (e, index) => {
         e.preventDefault()
         const defaultAnswer = 0
         const checked = e.target.checked
 
+        
         if(correctAnswer == index){;
           if(!checked) setCorrectAnswer(defaultAnswer)
         }
@@ -46,7 +54,7 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
             setCorrectAnswer(index)
         }
     }
-
+    //copying active question object and updating properties this saves or updates the mode
     const onSaveQuestionClick = () => {
         const questionCopy = {...activeQuestion}
         questionCopy.question = questionText
@@ -71,6 +79,16 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
         
     }
 
+    //this function takes a question object as a parameter and updates the components state
+    //setQuestionText(question.question) sets the questionText state variable to the question.question value. 
+    //It updates the state with the text of the question.
+    //setanswer sets answer state
+
+    /*const index = question?.answers.map((a) => a.isCorrect).indexOf(true) 
+    creates a variable index that finds the index of the correct answer within the question.answers array.
+    It uses the map function to create a new array with the boolean values of isCorrect for each answer, 
+    and then indexOf(true) finds the index of the first true value. The optional chaining operator (?.) 
+    is used to avoid errors if question or question.answers is null or undefined.*/
     const loadQuestion = (question) => {
         setQuestionText(question.question)
         setAnswerOne(question.answers[0].answer)
@@ -82,6 +100,7 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
         setActiveQuestion(question)
     }
 
+    //maps over activequestion object and generates elements based on whether the answer is correct or not
     const renderAnswers = () => {
         let count = 0
         return activeQuestion?.answers.map((answer) => {
@@ -95,6 +114,7 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
         })
     }
     
+    //resets the form
     const resetForm = (e) => {
         if(mode == "add"){
             loadEmptyQuestion()

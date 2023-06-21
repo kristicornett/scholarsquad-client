@@ -5,12 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom';
-import { AdbIcon } from '@mui/material';
 import { getUser } from '../../managers/UserManager';
-export const NavBar = ({ token, setToken, userToken }) => {
+export const NavBar = ({ token, setToken, userData }) => {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
     const navbar = useRef()
@@ -27,8 +25,6 @@ export const NavBar = ({ token, setToken, userToken }) => {
         })
 
     },[])
-
-
 
     const logout = (event) => {
       event.preventDefault()
@@ -56,7 +52,7 @@ export const NavBar = ({ token, setToken, userToken }) => {
                 <Link to="/messages" className="navbar-item">
                   My Messages
                 </Link>
-                <Link to="schools/:schoolId" className="navbar-item">
+                <Link to={`schools/${userData.schoolId}`} className="navbar-item">
                   My School
                 </Link>
                 <Link className="navbar-item" onClick={logout}>Logout</Link>

@@ -11,3 +11,14 @@ export const getUser = () => {
     })
     .then((response) => response.json())
 }
+
+export const getAllUsers = () => {
+    const token = localStorage.getItem('scholarSquad_token')
+    return fetch(`${url}/users`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Token ${token}`
+        },
+    })
+    .then((response) => response.json())
+}

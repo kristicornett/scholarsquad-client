@@ -12,11 +12,11 @@ export const Authorized = ({token, setToken}) => {
                     <div className="shell-top">
                         <div className="shell-lefttop"></div>
                         <div className="shell-navbar">
-                            <NavBar token={token} setToken={setToken} userToken={userToken}></NavBar>
+                            <NavBar token={token} setToken={setToken} userData={userToken}></NavBar>
                         </div>
                     </div>
                     <div className="shell-bottom">
-                        <div className="shell-leftnav"><LeftNav /></div>
+                        <div className="shell-leftnav"><LeftNav userData={userToken} /></div>
                         <div className="shell-body"><Outlet /></div>
                     </div>
                 </div>

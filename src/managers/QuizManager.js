@@ -106,3 +106,13 @@ export const assignStudent = (quizId, studentId) => {
     })
     .then((response) => response.json())
 }
+
+export const getAssignedQuiz = (quizId) => {
+    return fetch(`${url}/quizzes/${quizId}/assigned`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`
+        },
+    })
+    .then((response) => response.json())
+}

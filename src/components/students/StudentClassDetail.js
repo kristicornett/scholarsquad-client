@@ -39,8 +39,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
             renderCell: (params) => {
                 const currentRow = params.row;
                 const onClick = (e) => {
-                    alert('fix navigate for take quiz')
-                    //navigate(`/quizzes/${currentRow.id}`)
+                    navigate(`/quiz/${currentRow.quizId}`)
                 };
                 return (
                     <Stack direction="row" spacing={2}>
@@ -95,6 +94,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
             assignments.filter((a) => !a.date_completed).map((q) => {
                 const row = {
                     id: q.id,
+                    quizId: q.quiz.id,
                     classroomName: q.quiz.classroom.name,
                     isCompleted: !!q.date_completed,
                     isCompletedText: !!q.date_completed ? 'Yes' : 'No',
@@ -111,6 +111,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
             assignments.filter((a) => !!a.date_completed).map((q) => {
                 const row = {
                     id: q.id,
+                    quizId: q.quiz.id,
                     classroomName: q.quiz.classroom.name,
                     isCompleted: !!q.date_completed,
                     dateCompleted: q.date_completed,
