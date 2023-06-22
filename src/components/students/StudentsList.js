@@ -1,3 +1,5 @@
+//for admin usage
+
 import { useEffect, useState } from "react";
 import { getAllTeachers, deleteTeacher, updateTeacher } from "../../managers/TeacherManager";
 import { getAllStudents, deleteStudent, updateStudent } from "../../managers/StudentManager";

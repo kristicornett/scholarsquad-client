@@ -1,3 +1,5 @@
+//admin usage
+
 import { useEffect, useState } from "react";
 import { getAllTeachers, deleteTeacher, updateTeacher } from "../../managers/TeacherManager";
 import { useNavigate } from "react-router-dom";

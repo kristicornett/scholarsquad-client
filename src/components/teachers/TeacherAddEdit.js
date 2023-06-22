@@ -1,3 +1,5 @@
+//admin usage for manual adding
+
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getSingleTeacher, createTeacher } from '../../managers/TeacherManager'

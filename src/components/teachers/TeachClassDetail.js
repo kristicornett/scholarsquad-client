@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAllStudents } from "../../managers/StudentManager";
 import { useRef } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Container, Stack, Typography, Select, MenuItem,  FormControl } from '@mui/material';
+import { Button, Container, Stack, Typography, Select, MenuItem,  FormControl, FormLabel } from '@mui/material';
 
 
 export const TeacherClassDetail = ({userData, classroomId}) => {
@@ -151,7 +151,7 @@ export const TeacherClassDetail = ({userData, classroomId}) => {
         <Container maxWidth="lg" sx={{ border: 1, borderColor: 'secondary.main', borderRadius: 2, marginTop: 8 }}>
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <div style={{ flex: 1 }}>
-                    <Stack direction="column" spacing={1} sx={{}}>
+                    
                         <div>
                             <Typography variant='h3'>
                                 {classDetail.name}
@@ -160,11 +160,11 @@ export const TeacherClassDetail = ({userData, classroomId}) => {
                                 {`(Room: ${classDetail.roomNumber})`}
                             </Typography>
                         </div>
-
-                        <Typography>
+                        <FormLabel>Description:</FormLabel>
+                        <Typography variant="h6">
                             {classDetail.description}
                         </Typography>
-                    </Stack>
+                    
                 </div>
                 {!isStudent &&
                     <div>

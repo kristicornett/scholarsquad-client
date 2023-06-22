@@ -1,3 +1,5 @@
+//saving for admin implementation 
+
 import { useEffect, useState } from "react";
 import { getAllSchools, deleteSchool } from "../../managers/SchoolManager";
 import { useNavigate } from "react-router-dom";

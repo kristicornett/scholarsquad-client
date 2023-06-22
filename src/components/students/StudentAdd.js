@@ -1,3 +1,5 @@
+//for admin usage to manually add students in the future
+
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { createStudent, getSingleStudent } from '../../managers/StudentManager'

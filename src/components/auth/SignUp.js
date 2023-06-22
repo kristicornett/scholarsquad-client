@@ -36,10 +36,10 @@ export const SignUp = ({ setToken }) => {
   const email = useRef();
   const password = useRef();
   const grade = useRef()
-  const school = useRef(1);
+  const school = useRef('1');
   const verifyPassword = useRef();
   const passwordDialog = useRef();
-  const account_type = useRef(1);
+  const account_type = useRef('1');
   const navigate = useNavigate();
   const [schools, setSchools] = useState([]);
 

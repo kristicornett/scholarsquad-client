@@ -1,3 +1,5 @@
+//admin usage
+
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getSingleTeacher } from '../../managers/TeacherManager'

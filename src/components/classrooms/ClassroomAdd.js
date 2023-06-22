@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useNavigate } from "react-router-dom/dist"
 import { createTeacher, getSingleTeacher } from "../../managers/TeacherManager"
 import { createClass } from "../../managers/ClassManager"
+import { Button, FormLabel, TextField, TextareaAutosize, Typography } from "@mui/material"
 
 
 export const ClassroomAdd = () => {
@@ -39,29 +40,31 @@ export const ClassroomAdd = () => {
         )
     }
 
+    const spaceAbove = { padding: "10px 5px"}
+
     return <>
     { (user.isStaff) &&
     <div>
         <h2>Add a Class</h2>
         <div>
-            <div>
-                <label>Name:</label>
-                <input type="text" ref={className}></input>
+            <div style={spaceAbove}>
+                <FormLabel>Name: </FormLabel><br />
+                <TextField inputRef={className} variant='outlined' size="small" require></TextField>
             </div>
-            <div>
-                <label>School:</label>
-                <span>{teacher.school.name}</span>
+            <div style={spaceAbove}>
+            <FormLabel>School: </FormLabel><br/>
+            <Typography variant="h6" sx={{display: "inline"}}>{teacher.school.name}</Typography>
             </div>
-            <div>
-                <label>Description:</label>
-                <input type="text" ref={description}></input>
+            <div style={spaceAbove}>
+            <FormLabel>Description: </FormLabel><br />
+            <TextareaAutosize minRows={3} ref={description}></TextareaAutosize>
             </div>
-            <div>
-                <label>Room Number:</label>
-                <input type="text" ref={roomNumber}></input>
+            <div style={spaceAbove}>
+                <FormLabel>Room Number: </FormLabel><br />
+                <TextField inputRef={roomNumber} variant='outlined' size="small" require></TextField>
             </div>
-            <div>
-            <button type="button" onClick={onSaveClassroomClick}>Save</button>
+            <div style={spaceAbove}>
+            <Button variant="contained" type="button" onClick={onSaveClassroomClick}>Save</Button>
             </div>
         </div>
     </div>

@@ -8,10 +8,13 @@ import Checkbox from '@mui/material/Checkbox';
 import { getTeacherClassrooms } from '../../managers/TeacherManager';
 
 export const QuizCreate = () => {
-  const { classroomId } = useParams()
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let classroomId = params.get('classroomId');
 
   const [classrooms, setClassrooms] = useState([])
-  const [selectedClassroomId, setSelectedClassroomId] = useState()
+  const [selectedClassroomId, setSelectedClassroomId] = useState(classroomId)
+  const [currentClassroomName, setCurrentClassroomName] = useState()
   const title = useRef()
   const description = useRef()
   const [user, setUser] = useState({})
@@ -36,8 +39,9 @@ export const QuizCreate = () => {
 
     getTeacherClassrooms(tokenUser.teacherId)
     .then((result) => {
-      if(result.length > 0) setSelectedClassroomId(result[0].id)
       setClassrooms(result)
+      const match = result.find((c) => c.id == classroomId)
+      if(match) setCurrentClassroomName(match.name)
     })
 
     }, [])
@@ -102,7 +106,7 @@ export const QuizCreate = () => {
 
   const renderClassroomSection = () => {
       if(!classroomId){
-        return <div>
+        return <div style={{marginTop: 15}}>
           <FormControl fullWidth>
             <InputLabel id="classroom-select-label">Classroom</InputLabel>
             <Select
@@ -122,9 +126,9 @@ export const QuizCreate = () => {
       }
       else
       {
-        return <div>
+        return <div style={{marginTop: 15}}>
           <FormLabel id='lblClassroom'>Classroom:</FormLabel>
-          <Typography variant="body1"></Typography>
+          <Typography variant="body1">{currentClassroomName}</Typography>
         </div>
       }
   }
@@ -144,7 +148,7 @@ export const QuizCreate = () => {
     answerTwo.current.setAttribute('error', 'error')
     setQuestions(copy)
     setSelectedCorrectAnswer(1)
-    alert(JSON.stringify(question))
+    //alert(JSON.stringify(question))
   }
 
   const onSelectedAnswerChanged = (event, answerId) => {
@@ -169,14 +173,14 @@ export const QuizCreate = () => {
                                                                     <DeleteIcon />
                                                                   </IconButton> 
         <div>Answers
-            <ul>
+          <div>
                 {question.answers.map((word) => {
                     if(word == question.correctAnswer)
-                        return <li key={word}><b>{word}</b></li>
+                        return <div key={word}><b>{word}</b></div>
                     else
-                        return <li key={word}>{word}</li>
+                        return <div key={word}>{word}</div>
                 })}
-            </ul>
+          </div>
         </div>
 
     </div>
@@ -223,10 +227,11 @@ export const QuizCreate = () => {
           label="Title"
           inputRef={title}
           variant="outlined"
+          style={{marginTop: 15}}
         />
       </FormControl>
       {renderClassroomSection()}
-      <FormControl fullWidth>
+      <FormControl  style={{marginTop: 15}} fullWidth>
         <FormLabel id="description-text-label">
         Description
         </FormLabel>
@@ -239,18 +244,24 @@ export const QuizCreate = () => {
           </TextareaAutosize>
       </FormControl>
       </Box>
-      <Card variant="outlined">
+      <Card variant="outlined" style={{marginTop: 15}}>
         <CardContent>
+          <Typography variant="h6">Generate Questions (AI)</Typography>
             <TextField id="keyword-text" label="Add a Keyword"  value={keywordInput} onInput={e => setKeyWordInput(e.target.value)} variant="standard"></TextField>
-          <Button variant="contained" size="small" onClick={onAddKeywordClicked}>Add</Button>
+            <Button variant="contained" size="small" style={{marginTop: 15}} onClick={onAddKeywordClicked}>Add</Button><br />
+            <div style={{marginTop: 15}}>
           {
             keywords.map((word) => {
               return <Chip key={word} variant="outlined" label={word} onDelete={onKeywordDelete(word)}></Chip>
             })
           }
+          </div>
+          <div>
+          <Button style={{marginTop: 15}} variant="contained" onClick={onGenerateQuestionsClicked}>Generate Questions</Button>
+          </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card style={{marginTop: 15}}>
         <CardContent>
         
         <Typography variant="h5">Add Questions</Typography>
@@ -263,9 +274,9 @@ export const QuizCreate = () => {
                       inputRef={questionText}
                       variant="outlined"
                       required
-                      size='small' sx={{ }}></TextField>
+                      size='small'></TextField>
             </FormControl>
-            <TextField id="question-answer-one" label="Answer 1" inputRef={answerOne} variant='outlined' size="small" required></TextField><FormControlLabel control={<Checkbox checked={selectedCorrectAnswer == 1} onChange={(e) => onSelectedAnswerChanged(e, 1)}  />} label="Correct" />
+            <TextField id="question-answer-one" label="Answer 1" inputRef={answerOne} variant='outlined' size="small" required ></TextField><FormControlLabel control={<Checkbox checked={selectedCorrectAnswer == 1} onChange={(e) => onSelectedAnswerChanged(e, 1)}  />} label="Correct" />
             <TextField id="question-answer-two" label="Answer 2" inputRef={answerTwo} variant='outlined' size="small" required></TextField><FormControlLabel control={<Checkbox  checked={selectedCorrectAnswer == 2} onChange={(e) => onSelectedAnswerChanged(e,2)}  />} label="Correct" />
             <TextField id="question-answer-three" label="Answer 3" inputRef={answerThree} variant='outlined' size="small" required></TextField><FormControlLabel control={<Checkbox  checked={selectedCorrectAnswer == 3} onChange={(e) => onSelectedAnswerChanged(e, 3)}  />} label="Correct" />
             <TextField id="question-answer-four" label="Answer 4" inputRef={answerFour} variant='outlined' size="small" required></TextField><FormControlLabel control={<Checkbox checked={selectedCorrectAnswer == 4} onChange={(e) => onSelectedAnswerChanged(e, 4)}   />} label="Correct" />
@@ -273,7 +284,7 @@ export const QuizCreate = () => {
         </Box>
         </CardContent>
       </Card>
-      <Button variant="contained" onClick={onGenerateQuestionsClicked}>Generate Questions</Button>
+      
       {questions && (
          questions.map((question => {
 
@@ -281,9 +292,16 @@ export const QuizCreate = () => {
          }))
              
         )}
-      <div>
+      <div style={{padding: "15px"}}>
         <Button variant="contained" onClick={onClickSubmit}>Save Quiz</Button>
       </div>
 
 </Container>
   )}
+
+
+
+
+
+
+

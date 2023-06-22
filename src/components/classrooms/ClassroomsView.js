@@ -2,7 +2,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect } from "react"
 import { useState } from "react"
-import { useRef } from "react"
 import Box from '@mui/material/Box';
 import { getTeacherClassrooms } from '../../managers/TeacherManager';
 import Stack from '@mui/material/Stack';
@@ -15,13 +14,6 @@ export const ClassroomsView = ({userData}) => {
     const [rows, setRows] = useState([])
     const [columns, setColumns] = useState([])
     const navigate = useNavigate()
-    const RenderActionButtons = ({params}) => {
-        const [count, setCount] = useState(0);
-      
-        return (
-          <Button onClick={() => setCount((prev) => prev + 1)}>{count} click(s)</Button>
-        );
-      };
 
     const renderTeacherClasses = (classrooms) => {
         setColumns( [
@@ -117,6 +109,11 @@ export const ClassroomsView = ({userData}) => {
 
     return(
         <Box sx={{ height: 400, width: '100%' }}>
+            {userData.isStaff && 
+          <div style={{padding: "20px"}}>
+            <Button variant="contained" onClick={(e) => navigate('/classrooms/add')}> Add a Class </Button>
+          </div>
+          }
       <DataGrid
         rows={rows}
         columns={columns}

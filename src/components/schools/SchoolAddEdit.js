@@ -1,3 +1,5 @@
+//not being used currently but will for future admin usage
+
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { createSchool, getSingleSchool } from '../../managers/SchoolManager'
