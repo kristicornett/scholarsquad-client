@@ -8,6 +8,7 @@ import { getTeacherClassrooms } from '../../managers/TeacherManager';
 import Stack from '@mui/material/Stack';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { getStudentClassrooms } from '../../managers/StudentManager';
 
 export const ClassroomsView = ({userData}) => {
 
@@ -58,11 +59,51 @@ export const ClassroomsView = ({userData}) => {
         setRows(rowSet)
     }
 
+    const renderStudentClasses = (classrooms) => {
+        setColumns( [
+            { field: 'name', headerName: 'Class Name', width: 250},
+            { field: 'roomNumber', headerName: 'Room Number', width: 150},
+            { field: 'description', headerName: 'Description', width: 350},
+            {
+                field: "action",
+                headerName: "Action",
+                sortable: false,
+                disableClickEventBubbling: true,
+                width: 300,
+                renderCell:  (params) => {
+                    const onClick = (e) => {
+                      const currentRow = params.row;
+                      navigate(`/classrooms/${currentRow.id}`)
+                    };
+                    
+                    return (
+                      <Stack direction="row" spacing={2}>
+                        <Button onClick={onClick}>View</Button>
+                      </Stack>
+                    );
+                }
+              },
+              
+        ])
+        const rowSet = []
+        classrooms.map((classroom) => {
+            rowSet.push( {
+                id: classroom.id, name: classroom.name, roomNumber: classroom.roomNumber, studentCount: classroom.students.length, description: classroom.description
+            })
+        })
+        setRows(rowSet)
+    }
+
     useEffect(()=>{
         if(userData.isStaff){
             getTeacherClassrooms(userData.teacherId)
             .then((result) => {
                 renderTeacherClasses(result)
+            })
+        } else {
+            getStudentClassrooms(userData.studentId)
+            .then((result) => {
+                renderStudentClasses(result)
             })
         }
 
@@ -89,7 +130,9 @@ export const ClassroomsView = ({userData}) => {
         pageSizeOptions={[5]}
         disableRowSelectionOnClick
       />
+    
     </Box>
+    
     )
 }
 

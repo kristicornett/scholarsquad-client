@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { assignStudent, getAssignedStudents, getSingleQuiz } from '../../managers/QuizManager'
-import { Box, Button, Stack, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Button, FormLabel, Stack, Tab, Tabs, Typography } from '@mui/material'
 import PropTypes from 'prop-types';
 import { QuestionCard } from './QuestionCard';
 import { createQuestion, deleteQuestion } from '../../managers/QuestionManager';
@@ -9,7 +9,7 @@ import { getClassStudents } from '../../managers/ClassManager';
 import { DataGrid } from '@mui/x-data-grid';
 import moment from 'moment/moment';
 
-export const QuizDetailView = () => {
+export const QuizDetailView = ({userData}) => {
     const [quiz, setQuiz] = useState({ questions: [] })
     const { quizId } = useParams()
     const [selectedTab, setSelectedTab] = useState(0)
@@ -17,6 +17,7 @@ export const QuizDetailView = () => {
     const [allStudents, setAllStudents] = useState([])
     const [assignedStudents, setAssignedStudents] = useState([])
     const [studentRows, setStudentRows] = useState([])
+    const navigate = useNavigate()
 
     const studentCols = [
         { field: 'name', headerName: 'Name', width: 250},
@@ -56,6 +57,9 @@ export const QuizDetailView = () => {
 
     
     useEffect(() => {
+        //if this is a student they are in the wrong place
+        if(userData.studentId) navigate('/')
+
         getSingleQuiz(quizId)
             .then((result) => {
                 setQuiz(result)
@@ -78,7 +82,7 @@ export const QuizDetailView = () => {
             const assignedMatch = assigned.find((s) => s.student.id == student.id)
             if(assignedMatch){
                 isAssigned = true
-                completedOn = assignedMatch.completedOn ? moment(assignedMatch.completedOn) : '-'
+                completedOn = assignedMatch.completedOn ? moment(assignedMatch.completedOn).format('MM/DD/YYYY hh:ssa') : '-'
             }
             const stRow = {
                 id: student.id,
@@ -179,10 +183,20 @@ export const QuizDetailView = () => {
             <form>
                 <h1>{quiz.title}</h1>
                 <div>
-                    Description: {quiz.description}
+                    <FormLabel>Description: </FormLabel>
+                    <Typography sx={{display: "inline"}}>{quiz?.description}</Typography>
                 </div>
                 <div>
-                    Available From: {quiz.start_date} through {quiz.expire_date}
+                    <FormLabel>Class: </FormLabel>
+                    <Typography sx={{display: "inline"}}>{quiz?.classroom?.name}</Typography>
+                </div>
+                <div>
+                    <FormLabel>Assigned On: </FormLabel>
+                    <Typography sx={{display: "inline"}}> {quiz?.start_date ? moment(quiz.start_date).format('MM/DD/YYYY hh:ssa') : ''}</Typography>
+                </div>
+                <div>
+                    <FormLabel>Due By: </FormLabel>
+                    <Typography sx={{display: "inline"}}> {quiz?.expire_date ? moment(quiz.expire_date).format('MM/DD/YYYY hh:ssa') : 'No Due Date'}</Typography>
                 </div>
 
             </form>
@@ -195,7 +209,7 @@ export const QuizDetailView = () => {
             <TabPanel value={selectedTab} index={0}>
 
                 <div><Button variant="contained" onClick={onAddQuestionClick}>Add a Question</Button></div>
-                {isAddQuestionOn && <div><QuestionCard onSave={onAddQuestionSave} onCancel={onAddQuestionCancel}></QuestionCard></div>}
+                {isAddQuestionOn && <div><QuestionCard mode="add" onSave={onAddQuestionSave} onCancel={onAddQuestionCancel}></QuestionCard></div>}
                 {quiz.questions.map((question) => {
                     return <QuestionCard mode="edit" key={question.id} question={question} onDelete={onDeleteQuestion}></QuestionCard>
                 })}
@@ -211,7 +225,7 @@ export const QuizDetailView = () => {
                             },
                         },
                     }}
-                    pageSizeOptions={[5]}n
+                    pageSizeOptions={[5]}
                     disableRowSelectionOnClick
                 />
             </TabPanel>

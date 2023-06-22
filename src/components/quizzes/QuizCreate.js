@@ -205,7 +205,7 @@ export const QuizCreate = () => {
     </Stack>
     </div>
     <div style={{float: "right"}}>
-             Right Div If Needed
+             
         </div>
     </div>
     <Box

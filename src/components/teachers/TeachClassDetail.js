@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getAllStudents } from "../../managers/StudentManager";
 import { useRef } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Container, Stack, Typography, TextField, Box, TextareaAutosize, InputLabel, Select, MenuItem, FormLabel, FormControl, Card, CardContent, Chip, FormControlLabel, IconButton } from '@mui/material';
+import { Button, Container, Stack, Typography, Select, MenuItem,  FormControl } from '@mui/material';
 
 
 export const TeacherClassDetail = ({userData, classroomId}) => {
@@ -171,10 +171,6 @@ export const TeacherClassDetail = ({userData, classroomId}) => {
                         <div style={{ float: "right" }}>
                             <Button onClick={onClickCreateQuiz}>Create a Quiz</Button>
                         </div>
-
-                        <div style={{ float: "right" }}>
-                            <Button onClick={onClickAddStudent}>Add a Student</Button>
-                        </div>
                         <FormControl fullWidth sx={{float:"right"}}>
                             <Select 
                             size="small"
@@ -188,7 +184,10 @@ export const TeacherClassDetail = ({userData, classroomId}) => {
                             })}
                             </Select>
                         </FormControl>
-                                    </div>
+                        <div style={{ float: "right", display: (!!selectedStudent.current) ? 'block' : 'none' }}>
+                            <Button onClick={onClickAddStudent}>Add Student</Button>
+                        </div>
+                    </div>
                 }
 
             </div>
@@ -229,107 +228,3 @@ export const TeacherClassDetail = ({userData, classroomId}) => {
         </Container>
         </>)
 }
-
-
-// const {classroomId} = useParams()
-    // const user = JSON.parse(localStorage.getItem('scholarSquad_user'))
-    // const [allStudents, setAllStudents] = useState([])
-    // const [filteredStudents, setFilteredStudents] = useState([])
-    // const selectedStudent = useRef()
-    // const navigate = useNavigate()
-    // const [classDetail, setClassDetail] = useState((
-    //     {
-    //         name: '',
-    //         students: [],
-    //         quizzes: []
-    //     }
-    // ))
-   
-
-    // useEffect(() => {
-    //     const singleClass = getSingleClass(classroomId)
-        
-    //     const students = getAllStudents()
-        
-    //     Promise.all([singleClass, students])
-    //     .then(([classResults, studentResults])=> {
-    //         setClassDetail(classResults)
-    //         setAllStudents(studentResults)
-    //         filterStudents(classResults, studentResults)
-    //     })
-    // }, [])
-
-    // const filterStudents = (classroom, students) => {
-    //     //filter list of students to ones that are not currently in class
-    //     //const arr = obj1.filter(i => !obj2.includes(i.id))
-    //     const filteredStudents = students.filter(function(student){
-    //         const r =classroom.students.map(s => s.id).indexOf(student.id) === -1;
-    //         return r
-    //       })
-    //     setFilteredStudents(filteredStudents)
-
-    // }
-
-    // const onClickAddStudent = (event) => {
-    //     event.preventDefault()
-    //     const classroomId = classDetail.id 
-    //     const studentId = selectedStudent.current.value
-    //     addStudentToClass(classroomId, studentId)
-    //     .then(() => {
-    //         refreshStudents()
-    //     })
-    // }
-    // const refreshStudents = () => {
-    //     getClassStudents(classDetail.id).then((studentArray) => {
-    //       const copy = {...classDetail}
-    //       copy.students = studentArray;
-    //       setClassDetail(copy)
-    //       filterStudents(copy, allStudents)
-    //     });
-    //   }
-
-
-//     <article className="teacher_class_detail">
-//     <section key={`class--${classDetail.id}`}>
-//       <div>Class Name:</div>
-//       <div className="card">{classDetail.name}</div>
-//       <div>
-//         <div>Students in class:</div>
-//         {
-//             classDetail.students.map((student) => {
-//                 return (
-//                     <div key={student.id} className='card'>{student.full_name}</div>
-//                 )
-//             })
-//         }
-//       </div>
-//       <div>
-//         <div>Quizzes for Class:</div>
-//         {
-//             classDetail.quizzes.map((quiz) => {
-//                 return (
-//                     <div key={quiz.id} className='card'>{quiz.title}</div>
-//                 )
-//             })
-//         }
-//       </div>
-//       <div>
-//         <select className='form-select' ref={selectedStudent}
-//             >
-//             <option>Select Student</option>
-//             {
-//                 filteredStudents.map((student) => {
-//                     return (
-//                         <option key={student.id} value={student.id}>
-//                             {student.full_name}
-//                         </option>
-//                     )
-//                 })
-//             }
-//         </select>
-//         <button type='button' onClick={onClickAddStudent}>Add Student</button>
-//       </div>
-//     </section>
-  
-
-// </article>

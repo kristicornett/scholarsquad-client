@@ -22,7 +22,7 @@ export const LeftNav = ({ userData }) => {
             <div>
                 <Link to="/classrooms">
                     <div className="left-menu-item">
-                    <Tooltip title="Classes">        
+                    <Tooltip title="My Classes">        
                             <SchoolIcon fontSize="large" />
                     </Tooltip>
                     </div></Link>
@@ -30,7 +30,7 @@ export const LeftNav = ({ userData }) => {
             <div>
                 <Link to="/quizzes">
                     <div className="left-menu-item">
-                        <Tooltip title="Quizzes">
+                        <Tooltip title="My Quizzes">
                             <QuizIcon fontSize="large" />
                         </Tooltip>  
                     </div>
@@ -39,7 +39,7 @@ export const LeftNav = ({ userData }) => {
             <div>
                 <Link to='/messages'>
                     <div className='left-menu-item'>
-                    <Tooltip title="Messasges">
+                    <Tooltip title="My Messasges">
                             <MailIcon fontSize='large' />
                     </Tooltip>
                     </div>
@@ -57,3 +57,12 @@ export const LeftNav = ({ userData }) => {
     )
 
 }
+
+
+
+
+
+
+
+
+

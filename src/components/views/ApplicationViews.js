@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { Login } from "../auth/Login";
-import { Register } from "../auth/Register";
+import { SignIn } from "../auth/SignIn";
+import { SignUp } from "../auth/SignUp"
 import { Authorized } from "../Authorized";
-import { SchoolDetails } from "../schools/SchoolDetails";
 import { QuizCreate } from "../quizzes/QuizCreate";
 import { Dashboard } from "./Dashboard";
 import { SchoolAddEdit } from "../schools/SchoolAddEdit.js";
@@ -19,6 +18,7 @@ import { QuizzesView } from "../quizzes/QuizzesView";
 import { MessagesView } from '../messages/MessagesView'
 import { SchoolView } from "../schools/SchoolView";
 import { QuizTake } from "../quizzes/QuizTake";
+import { SchoolDetailView } from "../schools/SchoolDetailView";
 
 export const ApplicationViews = ({ token, setToken }) => {
   const userToken = localStorage.getItem('scholarSquad_user');
@@ -26,14 +26,14 @@ export const ApplicationViews = ({ token, setToken }) => {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/register" element={<Register setToken={setToken} />} />
+        <Route path="/login" element={<SignIn setToken={setToken} />} />
+        <Route path="/register" element={<SignUp setToken={setToken} />} />
         <Route element={<Authorized token={token} setToken={setToken} />}>
         <Route path="/" element={<Dashboard token={token} userData={userData}/>} /> 
           <Route path="/schools" element={<SchoolView />} />
-          <Route path="/schools/:schoolId" element={<SchoolDetails />} />
+          <Route path="/schools/:schoolId" element={<SchoolDetailView />} />
           <Route path="/schools/create" element={<SchoolAddEdit/>} />
-          <Route path="/quizzes/:quizId" element={<QuizDetailView />} />
+          <Route path="/quizzes/:quizId" element={<QuizDetailView userData={userData} />} />
           <Route path="/quizzes/create" element={<QuizCreate />} />
           <Route path="/teachers" element={<TeacherList />} />
           <Route path="/teachers/:teacherId" element={<TeacherDetails />} />

@@ -116,3 +116,15 @@ export const getAssignedQuiz = (quizId) => {
     })
     .then((response) => response.json())
 }
+
+export const submitQuiz = (quizId, submitDetails) => {
+    return fetch(`${url}/quizzes/${quizId}/submit`, {
+        method: 'POST',
+        headers: {
+            Authorization: `Token ${localStorage.getItem('scholarSquad_token')}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(submitDetails)
+    })
+    .then(response => response.json())
+}

@@ -61,7 +61,7 @@ export const ClassroomAdd = () => {
                 <input type="text" ref={roomNumber}></input>
             </div>
             <div>
-                <button type="button" onClick={onSaveClassroomClick}>Save</button>
+            <button type="button" onClick={onSaveClassroomClick}>Save</button>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ export const Dashboard = ({token, setToken, userData}) => {
         () => {
             if(!token || token.length === 0){
                 navigate('/login')
+           
            }
         },
         []

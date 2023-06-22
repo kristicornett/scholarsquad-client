@@ -57,36 +57,9 @@ export const TeacherHome = ({userData}) => {
     },[classrooms])
 
 
-
-    // const renderClassrooms = () => {
-    //     return classrooms.map((classroom) =>
-    //     {
-    //         return <div key={classroom.id}>
-    //                 <Link to={`/classrooms/${classroom.id}`}>{classroom.name}</Link>
-    //              </div>
-    //     })
-    //}
-
      const onClickAddClass = () => {
         navigate(`/classrooms/add`)
      }
-
-//     return (
-//         <>
-//         <h1>Teacher Dashboard</h1>
-//         <div>My School: {teacher?.school?.name}</div>
-//         <div>Classes</div>
-//         <div><Link to={`/classrooms/add`}>Add a Class</Link></div>
-//         <Fab color="primary" aria-label="add">
-//             <AddIcon size='small' onClick={onClickAddClass} />
-//             </Fab>
-//         <div>
-//             {renderClassrooms()}
-//         </div>
-//         <div><Link to='/'></Link></div>
-//         </>
-//     )
-// }
 
 return(
     
@@ -107,12 +80,3 @@ return(
 </Box>
 )
 }
-
-
-
-
-
-
-
-
-

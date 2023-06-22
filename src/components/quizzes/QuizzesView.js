@@ -5,6 +5,7 @@ import { getQuizzesByTeacher } from '../../managers/QuizManager'
 import Stack from '@mui/material/Stack'
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { getStudentQuizzes } from '../../managers/StudentManager'
 
 export const QuizzesView = ({userData}) => {
     const [rows, setRows] = useState([])
@@ -20,11 +21,11 @@ export const QuizzesView = ({userData}) => {
     const renderQuizzesByClass = (quizzes) => {
         setColumns( [
             { field: 'title', headerName: 'Quiz Title', width: 250 },
+            { field: 'classroom', headerName: 'Class', width: 250 },
             { field: 'description', headerName: 'Description', width: 250 }, 
             { field: 'start_date', headerName: 'Start Date', width: 150 },
             { field: 'expire_date', headerName: 'Due Date', width: 150 },
-            { field: 'questions', headerName: "Number of Questions", width: 150 },
-            { field: 'classroom', headerName: 'Classroom Name', width: 250 },
+            { field: 'questions', headerName: "Questions", width: 150 },
             {
                 field: "action",
                 headerName: "Action",
@@ -47,7 +48,9 @@ export const QuizzesView = ({userData}) => {
         const rowSet = []
         quizzes.map((quiz) => {
             rowSet.push( {
-                id: quiz.id, title: quiz.title, description: quiz.description, start_date: quiz.start_date, expire_date: quiz.expire_date, questions: quiz.questions.length, classroom: quiz.classroom.name
+                id: quiz.id, title: quiz.title, description: quiz.description, 
+                start_date: quiz.start_date, expire_date: quiz.expire_date, 
+                questions: quiz.questions.length, classroom: quiz.classroom.name
 
             })
         })
@@ -59,6 +62,13 @@ export const QuizzesView = ({userData}) => {
             getQuizzesByTeacher(userData.teacherId)
             .then((result) => {
                 renderQuizzesByClass(result)
+            })
+        } else {
+            getStudentQuizzes(userData.studentId)
+            .then((result) => {
+                const quizzes = result.map((q) => q.quiz
+                )
+                renderQuizzesByClass(quizzes)
             })
         }
     }, [])
@@ -80,4 +90,3 @@ export const QuizzesView = ({userData}) => {
       />
     </Box>)
 }
-

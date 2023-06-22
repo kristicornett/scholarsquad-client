@@ -3,7 +3,6 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useRef } from "react"
 import Box from '@mui/material/Box';
-import { getTeacherClassrooms } from '../../managers/TeacherManager';
 import Stack from '@mui/material/Stack';
 import { Button, Label } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +36,9 @@ export const MessagesView = ({userData}) => {
         const rowSet = []
         result.map((message) => {
             rowSet.push( {
-                id: message.id, from: message.sender.first_name + " " + message.sender.last_name, subject: message.subject, body: message.body, sent: moment(message.sent_date).toString(), read_date: message.read_date, read: message.read_date ? moment(message.read_date).toString() : "Unread"
+                id: message.id, from: message.sender.first_name + " " + message.sender.last_name, subject: message.subject, 
+                body: message.body, sent: moment(message.sent_date).format('MM/DD/YYYY hh:ssa'),
+                 read_date: message.read_date, read: message.read_date ? moment(message.read_date).format('MM/DD/YYYY hh:ssa') : "Unread"
             })
         })
         setMessageRows(rowSet)

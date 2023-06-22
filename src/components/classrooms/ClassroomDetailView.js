@@ -24,6 +24,7 @@ export const ClassroomDetailView = ({userData}) => {
 
     return(<>
         {renderView()}
+        
 
         </>)
 }

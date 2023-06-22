@@ -100,8 +100,8 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
                     isCompletedText: !!q.date_completed ? 'Yes' : 'No',
                     dateCompleted: q.date_completed,
                     title: q.quiz.title,
-                    dateAssigned: moment(q.date_assigned),
-                    dueBy: !!q.quiz.expire_date ? moment(q.quiz.expire_date) : ' - ',
+                    dateAssigned: moment(q.date_assigned).format('MM/DD/YYYY hh:ssa'),
+                    dueBy: !!q.quiz.expire_date ? moment(q.quiz.expire_date).format('MM/DD/YYYY hh:ssa') : ' - ',
                     score: 0
                 }
                 return row
@@ -116,8 +116,8 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
                     isCompleted: !!q.date_completed,
                     dateCompleted: q.date_completed,
                     title: q.quiz.title,
-                    dateAssigned: moment(q.date_assigned),
-                    dueBy: !!q.quiz.expire_date ? moment(q.quiz.expire_date) : ' - ',
+                    dateAssigned: moment(q.date_assigned).format('MM/DD/YYYY hh:ssa'),
+                    dueBy: !!q.quiz.expire_date ? moment(q.quiz.expire_date).format('MM/DD/YYYY hh:ssa') : ' - ',
                     score: 0
                 }
                 return row
@@ -191,3 +191,12 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
         </>
     )
 }
+
+
+
+
+
+
+
+
+
