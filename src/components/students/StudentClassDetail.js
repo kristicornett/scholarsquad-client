@@ -118,7 +118,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
                     title: q.quiz.title,
                     dateAssigned: moment(q.date_assigned).format('MM/DD/YYYY hh:ssa'),
                     dueBy: !!q.quiz.expire_date ? moment(q.quiz.expire_date).format('MM/DD/YYYY hh:ssa') : ' - ',
-                    score: 0
+                    score: q.score
                 }
                 return row
             })

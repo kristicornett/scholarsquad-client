@@ -2,9 +2,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useEffect } from "react"
 import { useState } from "react"
 import { useRef } from "react"
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { Button, Label } from '@mui/material';
+import { Button, FormLabel, TextareaAutosize, Select, Box, Stack, MenuItem, Grid, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { createMessage, getMessagesByUser, markMessageRead } from '../../managers/MessageManager';
 import {  } from '@mui/icons-material';
@@ -78,7 +76,7 @@ export const MessagesView = ({userData}) => {
       }
     ]  
 
-    const onClickSendMessage = () => {
+    const onSendMessageSubmit = () => {
       const msg = {
           "recipient" : selectedUserRef.current.value,
           "sender": userData.id,
@@ -105,38 +103,73 @@ export const MessagesView = ({userData}) => {
 
         if(!showMessageSent){
           return (
-        <Box component="form" ref={sendMessageFormRef} >
-          <div>
-            <label>From: </label><span>{userDetails.first_name + " " + userDetails.last_name}</span>
-          </div>
-          <div>
-            <label>to: </label>
-            <select ref={selectedUserRef}>
-              <option value="0">Select...</option>
-              {allUsers.map((user) => {
-                  return <option key={user.id} value={user.id}>{user.first_name + " " + user.last_name}</option>
-              })}
-            </select>
-          </div>
-          <div>
-            <label>Subject: </label><input type="text" ref={sendLetterSubjectRef}></input>
-          </div>
-          <div>
-            <label>Body: </label><input type="text" ref={sendLetterBodyRef}></input>
-          </div>
-          <div>
-            <Button variant="contained" size="small" onClick={onClickSendMessage}>Send</Button>
-            <Button variant="contained" size="small" onClick={(e) => { 
-              setIsShowMessage(!isSendMessage) 
-              sendMessageFormRef.current.reset()
-              }}>Cancel</Button>
-          </div>
-        </Box>
+            <Box component="form" noValidate onSubmit={onSendMessageSubmit} sx={{ mt: 3, minWidth:"350px", maxWidth:"550px", border: "1px solid gray",
+                                                                                  padding: 5, borderRadius: "8px" }} 
+                 ref={sendMessageFormRef}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <FormLabel>From: </FormLabel>
+                  <Typography>{userDetails.first_name + " " + userDetails.last_name}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                <FormLabel>To: </FormLabel><br />
+                  <Select
+                    size="small"
+                    fullWidth
+                    id="message-to-select"
+                    inputRef={selectedUserRef}>
+                      {allUsers.map((user) => {
+                          return (
+                      <MenuItem key={user.id} value={user.id}>{user.first_name + " " + user.last_name}</MenuItem>
+                          )
+                      })}
+                    </Select>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="subject"
+                    label="Subject"
+                    name="subject"
+                    autoComplete="subject"
+                    inputRef={sendLetterSubjectRef}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormLabel>Body: </FormLabel><br />
+                  <Stack
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="stretch"
+                      spacing={2}
+                  >
+                  <TextareaAutosize
+                    required
+                    label="body"
+                    variant="outlined"
+                    minRows={3}
+                    sx={{m: 1}}
+                    id="subject"
+                    ref={sendLetterBodyRef}
+                  />
+                  </Stack>
+                </Grid>
+                <Grid item xs={12}>
+                <Button variant="contained" size="small" type="submit" sx={{m: 1}}>Send</Button>
+                <Button variant="contained" size="small" onClick={(e) => { 
+                  setIsShowMessage(!isSendMessage) 
+                  sendMessageFormRef.current.reset()
+                  }}>Cancel
+                </Button>
+                </Grid>
+              </Grid>
+            </Box>
               )
       }
       else{
         return (
-          <><div>Message Sent</div><Button size="small" sx={{color: "red"}} onClick={(e) => setIsShowMessage(false)}> X </Button></>
+          <><div>Message Sent</div><Button size="small" sx={{m: 1}} onClick={(e) => setIsShowMessage(false)}>Close</Button></>
         )
       }
 
@@ -149,12 +182,15 @@ export const MessagesView = ({userData}) => {
          sendMessageForm()
       }
       {!isSendMessage && 
+      <div style={{marginTop: 15}}>
         <Button variant="contained" size="small" onClick={(e) => { 
           setShowMessageSent(false)
           setIsShowMessage(!isSendMessage) 
         }}>Send Message</Button>
+      </div>
       }
-      <Box sx={{ height: 400, width: '100%' }}>
+      
+      <Box sx={{ height: 400, width: '100%', marginTop: 5 }}>
       <DataGrid
         rows={messageRows}
         columns={columns}
@@ -193,4 +229,3 @@ export const MessagesView = ({userData}) => {
     </>
     )
 }
-

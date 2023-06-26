@@ -63,11 +63,13 @@ export const QuizTake = ({ userData }) => {
     const answerQuestion = (event, question, answerId) => {
         if(event.target.checked) {
             question.studentAnswer.answer_id = answerId
+            question.studentAnswer.question_id= question.id
             setCurrentAnswerId(answerId)
         }
         else {
             if(question.studentAnswer.answer_id = answerId){
                 question.studentAnswer.answer_id = null
+                question.studentAnswer.question_id= question.id
                 setCurrentAnswerId(null)
             }
         }

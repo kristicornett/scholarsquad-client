@@ -40,17 +40,20 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
 
     //function to call when the user changes the selected answer for a question
     //and update based on selection
+
+
     const onSelectedAnswerChanged  = (e, index) => {
         e.preventDefault()
         const defaultAnswer = 0
         const checked = e.target.checked
-
-        
+        //if what was clicked is already the same as the answer being set
         if(correctAnswer == index){;
+            //and if is unchecked, then set the default answer
           if(!checked) setCorrectAnswer(defaultAnswer)
         }
         else
         {
+            //otherwise set the new answer
             setCorrectAnswer(index)
         }
     }
@@ -67,6 +70,7 @@ export const QuestionCard = ({question, mode, onSave, onCancel, onDelete}) => {
         questionCopy.answers[3].answer = answerFour
         questionCopy.answers[3].isCorrect = (correctAnswer === 3)
         if(mode == "add"){
+            //call the parent save
             onSave(questionCopy)
         }
         else{

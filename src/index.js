@@ -12,6 +12,7 @@ import theme from './theme'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  //I implemented a theme to use from material UI.
   <ThemeProvider theme={theme}>
     <BrowserRouter>
       <ScholarSquad />

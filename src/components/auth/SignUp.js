@@ -164,6 +164,7 @@ const handleRegister = (event) => {
                   inputRef={grade}
                 />
               </Grid>
+              <Grid item xs={12}>
               <InputLabel>School</InputLabel>
               <Select
               size="small"
@@ -176,8 +177,11 @@ const handleRegister = (event) => {
                     )
                 })}
               </Select>
+              </Grid>
+              <Grid item xs={12}>
               <InputLabel id="demo-simple-select-label">Account Type</InputLabel>
               <Select id="account-type"
+              size="small"
               inputRef={account_type}
               fullWidth>
                 <MenuItem key={1} value={'teacher'}>{"Teacher"}
@@ -185,7 +189,7 @@ const handleRegister = (event) => {
                 <MenuItem key={2} value={'student'}>{"Student"}
                 </MenuItem>
               </Select>
-              
+              </Grid>
             </Grid>
             <Button
               type="submit"

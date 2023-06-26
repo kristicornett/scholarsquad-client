@@ -13,6 +13,7 @@ export const ClassroomAdd = () => {
     const description = useRef()
     const roomNumber = useRef()
     const navigate = useNavigate();
+    //adding school as a property for default rendering. it is an object.
     const [teacher, setTeacher] = useState({"school": {}})
     
     useEffect(() => {   
@@ -39,7 +40,7 @@ export const ClassroomAdd = () => {
         }
         )
     }
-
+    // inline styling to reuse as a helper.
     const spaceAbove = { padding: "10px 5px"}
 
     return <>
