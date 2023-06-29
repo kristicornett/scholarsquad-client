@@ -6,15 +6,18 @@ import { useRef } from "react";
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment/moment";
+import { getSingleQuiz } from "../../managers/QuizManager";
 
 
 export const StudentClassDetail = ({ userData, classroomId }) => {
 
     const user = userData
+    const {studentId} = useParams()
     const isStudent = (!userData.isStaff && !userData.isAdmin)
     const [assignments, setAssignments] = useState([])
     const [assignedQuizRows, setAssignedQuizRows] = useState([])
     const [completedQuizRows, setCompletedQuizRows] = useState([])
+    const [viewquiz, setViewQuiz] = useState([])
     const navigate = useNavigate()
     const [classDetail, setClassDetail] = useState((
         {
@@ -39,7 +42,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
             renderCell: (params) => {
                 const currentRow = params.row;
                 const onClick = (e) => {
-                    navigate(`/quiz/${currentRow.quizId}`)
+                    navigate(`/students/${studentId}/quizzes?quiz_id=${currentRow.quizId}`)
                 };
                 return (
                     <Stack direction="row" spacing={2}>
@@ -64,9 +67,11 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
             renderCell: (params) => {
                 const currentRow = params.row;
                 const onClick = (e) => {
-                    alert('fix navigate for view results')
-                    //navigate(`/quizzes/${currentRow.id}`)
+                    getSingleQuiz(currentRow.id)
+                    navigate(`/quizzes/${currentRow.quizId}/result`)
+                   // navigate(`/students/${studentId}/quizzes?quiz_id=${currentRow.quizId}`)
                 };
+                
                 return (
                     <Stack direction="row" spacing={2}>
                             
@@ -88,6 +93,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
                 loadAssignments(quizResults)
             })
     }, [])
+    
 
     const loadAssignments = (assignments) => {
         const assignedRows =
