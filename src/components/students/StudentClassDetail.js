@@ -42,7 +42,7 @@ export const StudentClassDetail = ({ userData, classroomId }) => {
             renderCell: (params) => {
                 const currentRow = params.row;
                 const onClick = (e) => {
-                    navigate(`/students/${studentId}/quizzes?quiz_id=${currentRow.quizId}`)
+                    navigate(`/quiz/${currentRow.quizId}`)
                 };
                 return (
                     <Stack direction="row" spacing={2}>

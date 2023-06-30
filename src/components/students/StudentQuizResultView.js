@@ -41,32 +41,39 @@ export const StudentQuizResultView = ({userData}) => {
     }
 
         return <>
-            <div>
+        <div style={{marginTop: "10px", border: "1px solid black", padding: "2em"}}>
+            <div style={{marginBottom: "2px", padding: "3px"}}>
             {question.question}
             </div>
-            <div>
+            <div style={{fontWeight: "bold", marginBottom: "2px", padding: "3px"}}>
             Correct Answer: {correctAnswer.answer}
             </div>
-            <div>
-            Your Answer: {answerInfo.answer}
+            <div style={{marginBottom: "5px", padding: "3px"}}>
+            Your Answer: <div style={{color: "#39325F", display: "inline", marginTop: "3px"}}>{answerInfo.answer}</div>
+            </div>
             </div>
         </>
    }
 
    return <>
-        Student Quiz Result Page
-        <article>
-            Quiz: {quiz.title}
-            
-        </article>
-        <div>Teacher: {quiz?.created_by?.user?.last_name}</div>
+
+        <div style={{padding: "2em", backgroundColor: "#39325F", fontSize: "large", color: "white", maxWidth: "800px", marginTop: "2em", marginLeft: "3em"}}>
         <div>
-            Your score: {studentQuiz.score}
+           <div style={{fontWeight: "bold", display: "inline"}}>Quiz:</div> <div style={{display: "inline"}}>{quiz.title}</div>
+            
         </div>
+        <div>
+        <div style={{fontWeight: "bold", display: "inline"}}>Teacher: </div><div style={{display: "inline"}}>{quiz?.created_by?.user?.last_name}</div></div>
+        <div>
+        <div style={{fontWeight: "bold", display: "inline"}}>Your score: </div><div style={{display: "inline"}}>{studentQuiz.score}</div>
+        </div>
+        </div>
+        <div style={{border: "2px solid black", boxShadow: "5px 5px gray", padding: "2em", maxWidth: "800px", marginLeft: "54px"}}>
         {
             quiz?.questions?.map((question) => {
                 return renderQuestion(question)
             })
         }
+        </div>
     </>
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { generateQuiz } from '../../managers/QuizManager';
 import { createQuiz } from '../../managers/QuizManager';
 import { Form, useNavigate, useParams } from 'react-router-dom';
-import { Button, Container, Stack, Typography, TextField, Box, TextareaAutosize, InputLabel, Select, MenuItem, FormLabel, FormControl, Card, CardContent, Chip, FormControlLabel, IconButton } from '@mui/material';
+import { Button, CircularProgress, Container, Stack, Typography, TextField, Box, TextareaAutosize, InputLabel, Select, MenuItem, FormLabel, FormControl, Card, CardContent, Chip, FormControlLabel, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import { getTeacherClassrooms } from '../../managers/TeacherManager';
@@ -18,7 +18,7 @@ export const QuizCreate = () => {
   const title = useRef()
   const description = useRef()
   const [user, setUser] = useState({})
-  const [keywords, setKeyWords] = useState(['plethora','ambivalent','omniscient','attitude'])
+  const [keywords, setKeyWords] = useState([])
   const [keywordInput, setKeyWordInput] = useState([])
   const questionFormRef = useRef()
   const questionText = useRef()
@@ -257,7 +257,8 @@ export const QuizCreate = () => {
           }
           </div>
           <div>
-          <Button style={{marginTop: 15}} variant="contained" onClick={onGenerateQuestionsClicked}>Generate Questions</Button>
+
+          <Button style={{marginTop: 15}} variant="contained" onClick={onGenerateQuestionsClicked}>{isLoading ? <CircularProgress color="secondary" size={24} /> : "Generate Questions"}</Button>
           </div>
         </CardContent>
       </Card>
